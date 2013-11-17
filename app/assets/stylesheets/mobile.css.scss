@@ -1,10 +1,9 @@
 @import 'bootstrap';
 @import 'bootstrap-responsive';
+@import "colors";
 @import "_mixins.css.scss";
 @import 'vendor/autoSuggest';
 @import '_flash_messages.scss';
-
-$blue: #3f8fba;
 
 a {
   color: #2489ce;
@@ -144,7 +143,7 @@ body {
   margin-bottom: 10px;
 
   border: 1px solid #bbb;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid $border-grey;
   border-bottom: 1px solid #aaa;
 }
 
@@ -188,7 +187,7 @@ body {
   }
 
   h1 {
-    color: #999;
+    color: $text-grey;
     padding: 20px;
     text-shadow: 0 2px 0 #fff; } }
 
@@ -211,7 +210,7 @@ body {
 
 .comment {
   .time {
-    color: #777; } }
+    color: $text-dark-grey; } }
 
 .info {
   margin: {
@@ -304,96 +303,80 @@ body {
     font: {
       weight: normal;
       size: small; };
-    color: #999999; } }
+    color: $text-grey; } }
 
 .right {
   float: right; }
 
-.navbar {
-  @include box-shadow(0,1px,2px,#333);
-}
-
-.navbar-inner {
-  @include box-shadow(0,1px,2px,#333);
-
-  background: {
-    image: image-url("header-bg-long.jpg");
-  }
-
-  width: 100%;
+header {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  min-width: 250px;
   z-index: 10;
+  background: url("header-bg-long.jpg") rgb(40,35,35);
+  @include box-shadow(0, 1px, 2px, #333);
+  border-bottom: 1px solid #222;  
 
-  border: {
-    bottom: 1px solid #222;
+  #header_title { display: inline-block; }
+  
+  #nav_badges {
+    float: right;
+    margin: 4px 12px;
+    
+    .badge {
+      display: inline;
+      margin-left: 3px;
+      padding: 8px 3px;
+      padding-bottom: 9px;
+      font-weight: bold;
+      font-size: smaller;
+      width: 28px;
+    }
+    
+    .badge:hover .badge_count {
+        background-color: #bd0902;
+    }
+    
+    a {
+      padding: 5px 0px;
+    }
   }
-}
 
-#nav_badges {
-  display: inline-block;
-  float: right;
-  padding: 4px 12px;
-  
-  a:hover {
-    text-decoration: none;
-  }
-  
-  .badge {
-    position: relative;
-    display: inline;
-    margin-left: 3px;
-    padding: 8px 3px;
-    padding-bottom: 9px;
-    font-weight: bold;
+  .badge_count {
+    -moz-border-radius: 2px 2px 2px 2px;
+    -webkit-border-radius: 2px 2px 2px 2px;
+    border-radius: 2px 2px 2px 2px;
+    z-index: 3;
+    position: absolute;
+    top: 1px;
+    padding: 0 2px;
+      padding-bottom: 1px;
+    background-color: $red;
+    line-height: 12px;
+    color: white;
     font-size: smaller;
-    width: 28px;
   }
-  
-  .badge:hover .badge_count {
-      background-color: #bd0902;
+
+  #notification {
+    right: 140px;
   }
-  
-  a {
-    padding: 5px 0px;
+
+  #conversation {
+    right: 110px;
   }
-}
 
-.badge_count {
-  -moz-border-radius: 2px 2px 2px 2px;
-  -webkit-border-radius: 2px 2px 2px 2px;
-  border-radius: 2px 2px 2px 2px;
-  z-index: 3;
-  position: absolute;
-  top: 1px;
-  padding: 0 2px;
-    padding-bottom: 1px;
-  background-color: #a40802;
-  line-height: 12px;
-  color: white;
-  font-size: smaller;
-}
-
-#notification {
-  right: 140px;
-}
-
-#conversation {
-  right: 110px;
-}
-
-.badge-inverse {
-  background-color: #333333 !important;
-}
-
-#header_title {
-  position: relative;
-  top: -3px;
+  .badge-inverse {
+    background-color: #333333 !important;
+  }
 }
 
 footer {
   text-align: center;
   a,
   a:visited {
-    color: #999;
+    color: $text-grey;
     margin: 10px;
   }
   padding: {
@@ -409,13 +392,13 @@ footer {
   position: relative;
   padding: 10px;
   padding-top: 8px;
-  background: #eee;
+  background: $background-grey;
 
   margin: {
     top: 10px; };
 
   border: {
-    top: 1px solid #ddd;
+    top: 1px solid $border-grey;
   };
 
   min-height: 22px;
@@ -423,7 +406,7 @@ footer {
   > a,
   .show_comments {
     @include transition(color);
-    color: #999;
+    color: $text-grey;
     font-weight: bold;
   }
 
@@ -434,7 +417,7 @@ footer {
   }
 
   a.show_comments {
-    color: #999;
+    color: $text-grey;
 
     &.active:not(.bottom_collapse) {
       color: #444;
@@ -575,7 +558,7 @@ footer {
     background-color: #fff;
     padding: 5px;
     border: {
-      bottom: 1px solid #999;
+      bottom: 1px solid $border-dark-grey;
     }
     .counter {
       font-size: 14px;
@@ -616,12 +599,12 @@ select {
   z-index: 2;
 
   span {
-    color: #666;
+    color: $text-dark-grey;
     font-weight: bold;
     padding: 2px 7px;
     margin: 5px 6px;
     background: {
-      color: #eee;
+      color: $background-grey;
     }
   }
 }
@@ -655,7 +638,7 @@ select {
     span {
       padding: 2px 10px;
       font-weight: bold;
-      color: #999;
+      color: $text-grey;
       background: {
         color: #fff;
       }
@@ -698,13 +681,13 @@ select {
     height: 100%;
     margin-right: 5px;
     margin-top: 3px;
-display: inline-block;	
+display: inline-block;
 }
 
 #header-nav a {
     padding: 0 10px;
     width: 100%;
-    color: #939393;
+    color: $text-grey;
 }
 
 #header-nav > div {
@@ -800,7 +783,7 @@ textarea#message_text {
 
 form#new_conversation.new_conversation {
   background-color: #FFFFFF;
-  border-bottom: 1px solid #999999;
+  border-bottom: 1px solid $border-dark-grey;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   margin: 5px 0 5px 15px;
@@ -1090,7 +1073,7 @@ select#aspect_ids_ {
   font-size: 14px;
   line-height: 18px;
   color: inherit;
-  background-color: #EEE;
+  background-color: $background-grey;
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
   border-radius: 10px;
@@ -1117,7 +1100,7 @@ input#q.search {
       vertical-align: bottom;
     }
     &:hover {
-      color: #666;
+      color: $text-dark-grey;
       cursor: pointer;
 
       img {
@@ -1126,7 +1109,7 @@ input#q.search {
     }
     &:active {
       color: #444;
-      text-shadow: 0 1px 0 #fafafa;
+      text-shadow: 0 1px 0 $highlight-white;
 
       img  {
         @include opacity(1);
@@ -1156,7 +1139,7 @@ input#q.search {
   background: #fff;
 
   &.active {
-    border: 1px solid #999;
+    border: 1px solid $border-dark-grey;
   }
   position: relative;
   padding-right: 10px;
@@ -1258,8 +1241,8 @@ input#q.search {
     text-decoration: none;
     color: #000;
     margin: 5px 0px 5px 0px;
-    border-top: solid 1px #DDD;
-    border-bottom: solid 1px #DDD;
+    border-top: solid 1px $border-grey;
+    border-bottom: solid 1px $border-grey;
     padding: 5px 0px 2px 0px;
     overflow: hidden;
     img {
@@ -1283,3 +1266,20 @@ input#q.search {
 .remove_comment {
   opacity: 0.5;
 }
+
+.center {
+  text-align: center;
+}
+
+/* --- Getting started page --- */
+#hello-there {
+  h1, h2, h3 { line-height: normal; }
+  h1 { font-size: 25px; }
+  h2 { font-size: 20px; }
+  h3 { font-size: 15px; }
+  
+  h2, #awesome_button {
+    margin-top: 30px;
+  }
+}
+

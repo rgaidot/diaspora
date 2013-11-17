@@ -1,3 +1,51 @@
+# Head
+
+## Refactor
+* Move non-model federation stuff into lib/ [#4363](https://github.com/diaspora/diaspora/pull/4363)
+* Build a color palette to uniform color usage [#4437](https://github.com/diaspora/diaspora/pull/4437) [#4469](https://github.com/diaspora/diaspora/pull/4469) [#4479](https://github.com/diaspora/diaspora/pull/4479)
+* Rename bitcoin_wallet_id setting to bitcoin_address [#4485](https://github.com/diaspora/diaspora/pull/4485)
+* Batch insert posts into stream collection for a small speedup [#4341](https://github.com/diaspora/diaspora/pull/4351)
+* Ported fileuploader to Backbone and refactored publisher views [#4480](https://github.com/diaspora/diaspora/pull/4480)
+* Refactor 404.html, fix [#4078](https://github.com/diaspora/diaspora/issues/4078)
+* Remove the (now useless) last post link from the user profile. [#4540](https://github.com/diaspora/diaspora/pull/4540)
+* Refactor ConversationsController, move query building to User model. [#4547](https://github.com/diaspora/diaspora/pull/4547)
+* Refactor the Twitter service model [#4387](https://github.com/diaspora/diaspora/pull/4387)
+* Refactor ConversationsController#create, move more stuff to User model [#4551](https://github.com/diaspora/diaspora/pull/4551)
+* Refactor MessagesController#create, move stuff to User model [#4556](https://github.com/diaspora/diaspora/pull/4556)
+* Reorder the left bar side menu to put the stream first [#4569](https://github.com/diaspora/diaspora/pull/4569)
+
+## Bug fixes
+* Highlight down arrow at the user menu on hover [#4441](https://github.com/diaspora/diaspora/pull/4441)
+* Make invite code input width consistent across browsers [#4448](https://github.com/diaspora/diaspora/pull/4448)
+* Fix style of contacts in profile sidebar [#4451](https://github.com/diaspora/diaspora/pull/4451)
+* Fix profile mobile when logged out [#4464](https://github.com/diaspora/diaspora/pull/4464)
+* Fix preview with more than one mention [#4450](https://github.com/diaspora/diaspora/issues/4450)
+* Fix size of images in the SPV [#4471](https://github.com/diaspora/diaspora/pull/4471)
+* Adjust 404 message description to not leak logged out users if a post exists or not [#4477](https://github.com/diaspora/diaspora/pull/4477)
+* Make I18n system more robust against missing keys in pluralization data
+* Prevent overflow of too long strings in the single post view [#4487](https://github.com/diaspora/diaspora/pull/4487)
+* Disable submit button in sign up form after submission to avoid email already exists error [#4506](https://github.com/diaspora/diaspora/issues/4506)
+* Do not pull the 404 pages assets from Amazon S3 [#4501](https://github.com/diaspora/diaspora/pull/4501)
+* Fix counter background does not cover more than 2 digits on profile [#4499](https://github.com/diaspora/diaspora/issues/4499)
+* Fix commenting upon submission fail [#4005] (https://github.com/diaspora/diaspora/issues/4005)
+* Fix date color and alignment in the notifications dropdown [#4502](https://github.com/diaspora/diaspora/issues/4502)
+* Add a white background to images shown in the lightbox [#4475](https://github.com/diaspora/diaspora/issues/4475)
+* Refactor getting_started page, test if facebook is available, fix [#4520](https://github.com/diaspora/diaspora/issues/4520)
+* Avoid publishing empty posts [#4542](https://github.com/diaspora/diaspora/pull/4542)
+* Force comments sort order in mobile spv [#4578](https://github.com/diaspora/diaspora/pull/4578)
+* Fix getting started page for mobile [#4536](https://github.com/diaspora/diaspora/pull/4536)
+* Refactor mobile header, fix [#4579](https://github.com/diaspora/diaspora/issues/4579)
+
+## Features
+* Add oEmbed content to the mobile view [#4343](https://github.com/diaspora/diaspora/pull/4353)
+* One click to select the invite URL [#4447](https://github.com/diaspora/diaspora/pull/4447)
+* Disable "mark all as read" link if all notifications are read [#4463](https://github.com/diaspora/diaspora/pull/4463)
+* Collapse aspect list and tag followings list when switching to other views [#4462](https://github.com/diaspora/diaspora/pull/4462)
+* Highlight current stream in left sidebar [#4445](https://github.com/diaspora/diaspora/pull/4445)
+* Added ignore user icon [#4417](https://github.com/diaspora/diaspora/pull/4417)
+* Improve the management of the contacts visibility settings in an aspect [#4567](https://github.com/diaspora/diaspora/pull/4567)
+
+
 # 0.2.0.0
 
 **Attention:** This release includes a potentially long running migration! However it should be safe to run this while keeping your application servers on.
@@ -296,7 +344,7 @@ everything is set up.
 * Cleanup of script/server
 * Attempt to stabilize federation of attached photos (fix [#3033](https://github.com/diaspora/diaspora/issues/3033)  [#3940](https://github.com/diaspora/diaspora/pull/3940) )
 * Refactor develop install script [#4111](https://github.com/diaspora/diaspora/pull/4111)
-* Remove special hacks for supporting Ruby 1.8 [#4113] (https://github.com/diaspora/diaspora/pull/4139)
+* Remove special hacks for supporting Ruby 1.8 [#4113](https://github.com/diaspora/diaspora/pull/4139)
 * Moved custom oEmbed providers to config/oembed_providers.yml [#4131](https://github.com/diaspora/diaspora/pull/4131)
 * Add specs for Post#find_by_guid_or_id_with_user
 
