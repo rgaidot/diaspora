@@ -105,9 +105,10 @@ And /^I hover over the "([^"]+)"$/ do |element|
 end
 
 When /^I prepare the deletion of the first post$/ do
-  within('.stream_element', match: :first) do
-    find('.controls').hover
-    find('.remove_post').click
+  within(find('.stream .stream_element')) do
+    ctrl = find('.controls')
+    ctrl.hover
+    ctrl.find('.remove_post').click
   end
 end
 
@@ -266,4 +267,9 @@ end
 
 Then /^I should see the Bitcoin address$/ do
   find("#bitcoin_address")['value'].should == "AAAAAA"
+end
+
+Given /^"([^"]*)" is hidden$/ do |selector|
+  page.should have_selector(selector, visible: false)
+  page.should_not have_selector(selector)
 end

@@ -8,7 +8,9 @@ app.views.PublisherUploader = Backbone.View.extend({
   allowedExtensions: ['jpg', 'jpeg', 'png', 'gif', 'tif', 'tiff'],
   sizeLimit: 4194304,  // bytes
 
-  initialize: function() {
+  initialize: function(opts) {
+    this.publisher = opts.publisher;
+
     this.uploader = new qq.FileUploaderBasic({
       element: this.el,
       button:  this.el,
@@ -31,9 +33,9 @@ app.views.PublisherUploader = Backbone.View.extend({
     });
 
     this.el_info = $('<div id="fileInfo" />');
-    this.options.publisher.el_wrapper.before(this.el_info);
+    this.publisher.el_wrapper.before(this.el_info);
 
-    this.options.publisher.el_photozone.on('click', '.x', _.bind(this._removePhoto, this));
+    this.publisher.el_photozone.on('click', '.x', _.bind(this._removePhoto, this));
   },
 
   progressHandler: function(id, fileName, loaded, total) {
@@ -48,7 +50,7 @@ app.views.PublisherUploader = Backbone.View.extend({
 
   // add photo placeholders to the publisher to indicate an upload in progress
   _addPhotoPlaceholder: function() {
-    var publisher = this.options.publisher;
+    var publisher = this.publisher;
     publisher.setButtonsEnabled(false);
 
     publisher.el_wrapper.addClass('with_attachments');
@@ -60,19 +62,25 @@ app.views.PublisherUploader = Backbone.View.extend({
   },
 
   uploadCompleteHandler: function(id, fileName, response) {
-    this.el_info.text(Diaspora.I18n.t('photo_uploader.completed', {file: fileName})).fadeTo(2000, 0);
+    if (response.success){
+      this.el_info.text(Diaspora.I18n.t('photo_uploader.completed', {file: fileName})).fadeTo(2000, 0);
 
-    var id  = response.data.photo.id,
-        url = response.data.photo.unprocessed_image.url;
+      var id  = response.data.photo.id,
+          url = response.data.photo.unprocessed_image.url;
 
-    this._addFinishedPhoto(id, url);
-    this.trigger('change');
+      this._addFinishedPhoto(id, url);
+      this.trigger('change');
+    } else {
+      this._cancelPhotoUpload();
+      this.trigger('change');
+      this.el_info.text(Diaspora.I18n.t('photo_uploader.error', {file: fileName}));
+    }
   },
 
   // replace the first photo placeholder with the finished uploaded image and
   // add the id to the publishers form
   _addFinishedPhoto: function(id, url) {
-    var publisher = this.options.publisher;
+    var publisher = this.publisher;
 
     // add form input element
     publisher.$('.content_creation form').append(
@@ -96,6 +104,14 @@ app.views.PublisherUploader = Backbone.View.extend({
     }
   },
 
+  _cancelPhotoUpload: function() {
+    var publisher = this.publisher;
+    var placeholder = publisher.el_photozone.find('li.loading').first();
+    placeholder
+      .removeClass('loading')
+      .find('img').remove();
+  },
+
   // remove an already uploaded photo
   _removePhoto: function(evt) {
     var self  = this;
@@ -111,9 +127,9 @@ app.views.PublisherUploader = Backbone.View.extend({
         $.when(photo.fadeOut(400)).then(function(){
           photo.remove();
 
-          if( self.options.publisher.$('.publisher_photo').length == 0 ) {
+          if( self.publisher.$('.publisher_photo').length == 0 ) {
             // no more photos left...
-            self.options.publisher.el_wrapper.removeClass('with_attachments');
+            self.publisher.el_wrapper.removeClass('with_attachments');
           }
 
           self.trigger('change');
